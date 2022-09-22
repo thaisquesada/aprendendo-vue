@@ -19,7 +19,7 @@ export default {
         width: 100%;
         background-color: var(--cor-primaria);
         color: #fff;
-        padding: 20px;
+        padding: 9px 20px;
         margin: 9px 0;
         border: none;
         border-radius: 5px;
