@@ -10,7 +10,7 @@
 
     <div class="row sub-container">
       <div class="col-sm-2">
-        <Button value="Adicionar"></Button>
+        <Button :callback="adicionarProduto" value="Adicionar"></Button>
       </div>
     </div>
 
@@ -34,7 +34,10 @@
               <td>{{ item.quantidadeEstoque }}</td>
               <td>{{ item.valor | moeda }}</td>
               <td>{{ item.dataCadastro | data }}</td>
-              <td>Editar / Excluir</td>
+              <td>
+                <i @click="editarProduto" class="fas fa-solid fa-pen icones-tabela"></i>
+                <i @click="excluirProduto" class="fas fa-solid fa-trash icones-tabela"></i>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -70,6 +73,19 @@ import conversorDeMoeda from '@/utils/conversor-moeda';
       }
     },
     methods: {
+
+      adicionarProduto() {
+        this.$router.push({ name: "NovoProduto" })
+      },
+
+      editarProduto() {
+        alert("Aqui vou editar o produto!!!")
+      },
+
+      excluirProduto() {
+        alert("Aqui vou excluir o produto!!!")
+      },
+
       obterTodosOsProdutos() {
         produtoService.obterTodos()
         .then(response => {
@@ -88,7 +104,10 @@ import conversorDeMoeda from '@/utils/conversor-moeda';
 </script>
 
 <style scoped>
+  .icones-tabela {
+    margin: 5px;
+    cursor: pointer;
+    color: var(--cor-primaria);
 
-
-
+  }
 </style>

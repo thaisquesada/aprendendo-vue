@@ -30,21 +30,32 @@ export default {
     font-family: 'Quicksand', sans-serif;
   }
 
-  .container {
-    margin-top: 20px;
-  }
-
   .titulo {
     font-weight: 600;
     color: #363636;
+    font-size: 25px;
+    margin-top: 10px;
   }
 
-  hr {
-    margin: 0;
+  /* Override */
+  .btn-primary,
+  .btn-primary:active,
+  .btn-primary:focus,
+  .btn-primary:focus-visible,
+  .btn-primary:visited,
+  .btn-primary:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: var(--cor-primaria);
+    border: var(--cor-primaria);
+    outline: none;
+    box-shadow: none;
+    min-width: 90px;
   }
 
-  .sub-container {
-    margin-top: 15px;
+  .btn-primary:hover {
+    color: #fff;
+    background-color: var(--cor-secundaria);
+    border-color: var(--cor-secundaria);
   }
 
 </style>

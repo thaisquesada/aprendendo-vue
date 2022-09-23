@@ -7,7 +7,7 @@
 export default {
     name: 'Button',
     props: {
-        value: {type: String, require},
+        value: {type: String, default: ''},
         callback: { type: Function, default: () => {} }
     }
 }
