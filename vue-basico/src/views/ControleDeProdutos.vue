@@ -16,7 +16,7 @@
 
     <div class="row">
       <div class="col-sm-12">
-        <table class="table">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>código</th>
@@ -24,8 +24,19 @@
               <th>quantidade</th>
               <th>valor</th>
               <th>data de cadastro</th>
+              <th></th>
             </tr>
           </thead>
+          <tbody>
+            <tr v-for="item in produtos" :key="item.id">
+              <td>{{ item.id }}</td>
+              <td>{{ item.nome }}</td>
+              <td>{{ item.quantidadeEstoque }}</td>
+              <td>{{ item.valor | moeda }}</td>
+              <td>{{ item.dataCadastro | data }}</td>
+              <td>Editar / Excluir</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -37,11 +48,21 @@
 import Button from '../components/button/Button.vue';
 import produtoService from '@/api/produto-service';
 import Produto from '@/models/produto-model';
+import conversorDeData from '@/utils/conversor-data';
+import conversorDeMoeda from '@/utils/conversor-moeda';
 
   export default {
     name: 'Dashboard',
     components: {
       Button
+    },
+    filters: {
+      data(data) {
+        return conversorDeData.aplicarMascaraEmDataIso(data);
+      },
+      moeda(valor) {
+        return conversorDeMoeda.aplicarMascaraParaRealComPrefixo(valor);
+      }
     },
     data() {
       return {
