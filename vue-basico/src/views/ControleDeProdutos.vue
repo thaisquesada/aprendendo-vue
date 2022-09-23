@@ -21,6 +21,7 @@
             <tr>
               <th>código</th>
               <th>nome</th>
+              <th>quantidade</th>
               <th>valor</th>
               <th>data de cadastro</th>
             </tr>
@@ -30,11 +31,12 @@
     </div>
 
   </div>
-
 </template>
 
 <script>
 import Button from '../components/button/Button.vue';
+import produtoService from '@/api/produto-service';
+import Produto from '@/models/produto-model';
 
   export default {
     name: 'Dashboard',
@@ -43,8 +45,22 @@ import Button from '../components/button/Button.vue';
     },
     data() {
       return {
-        mensagem: 'Estou na tela Controle de Produtos'
+        produtos: []
       }
+    },
+    methods: {
+      obterTodosOsProdutos() {
+        produtoService.obterTodos()
+        .then(response => {
+          this.produtos = response.data.map(p => new Produto(p));
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+    },
+    mounted() {
+      this.obterTodosOsProdutos();
     }
   }
 
