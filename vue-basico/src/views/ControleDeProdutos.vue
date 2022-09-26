@@ -35,8 +35,8 @@
               <td>{{ item.valor | moeda }}</td>
               <td>{{ item.dataCadastro | data }}</td>
               <td>
-                <i @click="editarProduto" class="fas fa-solid fa-pen icones-tabela"></i>
-                <i @click="excluirProduto" class="fas fa-solid fa-trash icones-tabela"></i>
+                <i @click="editarProduto(item)" class="fas fa-solid fa-pen icones-tabela"></i>
+                <i @click="excluirProduto(item)" class="fas fa-solid fa-trash icones-tabela"></i>
               </td>
             </tr>
           </tbody>
@@ -78,8 +78,9 @@ import conversorDeMoeda from '@/utils/conversor-moeda';
         this.$router.push({ name: "NovoProduto" })
       },
 
-      editarProduto() {
-        alert("Aqui vou editar o produto!!!")
+      editarProduto(produto) {
+        // utilizamos o "params" para passarmos o objeto da forma que quisermos. no caso, estamos criando o parâmetro id, onde iremos enviar o id do produto
+        this.$router.push({ name: "EditarProduto", params: {id: produto.id } })
       },
 
       excluirProduto() {
