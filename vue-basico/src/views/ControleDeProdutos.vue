@@ -83,8 +83,29 @@ import conversorDeMoeda from '@/utils/conversor-moeda';
         this.$router.push({ name: "EditarProduto", params: {id: produto.id } })
       },
 
-      excluirProduto() {
-        alert("Aqui vou excluir o produto!!!")
+      excluirProduto(produto) {
+        
+        if(confirm(`Deseja excluir o produto "${produto.id}" - "${produto.nome}"`)) {
+          
+          produtoService.deletar(produto.id)
+          .then(() => {
+            // vamos ter que limpar a tabela
+
+            // encontrando o índice do produto que tem o id igual à esse
+            let indice = this.produtos.findIndex(p => p.id == produto.id);
+
+            // o método "splice" consegue deletar coisas de dentro de um array e guardar informações na posição desejada
+            // remover ou substituir itens de dentro de um array numa determinada posição
+            this.produtos.splice(indice, 1);
+              
+            setTimeout(() => {
+              alert("Produto excluído com sucesso!");
+            }, 500)
+          })
+          .catch(error => {
+            console.log(error);
+          })
+        }
       },
 
       obterTodosOsProdutos() {

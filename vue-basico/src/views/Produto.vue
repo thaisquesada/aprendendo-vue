@@ -121,7 +121,7 @@ export default {
                 this.produto = new Produto();
 
                 if(!this.continuarAdicionando) {
-                    this.$router.push({ nome: "ControleDeProdutos "})
+                    this.$router.push({name: "ControleDeProdutos"})
                 }
             })
             .catch(error => {
