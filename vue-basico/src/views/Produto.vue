@@ -112,7 +112,12 @@ export default {
 
         cadastrarProduto() {
             if(!this.produto.modeloValidoParaCadastro()) {
-                alert("O nome do produto é obrigatório para o cadastro!");
+
+                this.$swal({
+                    icon: 'warning',
+                    title: 'O nome do produto é obrigatório para o cadastro!',
+                    confirmButtonColor: '#000',
+                });
                 return;
             }
 
@@ -121,7 +126,11 @@ export default {
 
             produtoService.cadastrar(this.produto)
             .then(() => {
-                alert("Produto cadastrado com sucesso!");
+                this.$swal({
+                    icon: 'success',
+                    title: 'Produto cadastrado com sucesso!'
+            });
+
                 this.produto = new Produto();
 
                 if(!this.continuarAdicionando) {
@@ -135,7 +144,11 @@ export default {
 
         atualizarProduto() {
             if(!this.produto.modeloValidoParaAtualizar()) {
-                alert("O código e nome do produto são obrigatórios para a atualização!");
+                this.$swal({
+                    icon: 'warning',
+                    title: 'O código e nome do produto são obrigatórios para a atualização!',
+                    confirmButtonColor: '#000',
+                });
                 return;
             }
 
@@ -144,7 +157,13 @@ export default {
 
             produtoService.atualizar(this.produto)
             .then(() => {
-                alert("Produto atualizado com sucesso!");
+
+                this.$swal({
+                    icon: 'success',
+                    title: 'Produto atualizado com sucesso!',
+                    confirmButtonColor: '#000',
+                });
+
                 this.$router.push({name: "ControleDeProdutos"});
             })
             .catch(error => {
