@@ -72,6 +72,10 @@ import conversorDeMoeda from '@/utils/conversor-moeda';
         produtos: []
       }
     },
+    mounted() {
+      this.obterTodosOsProdutos();
+    },
+
     methods: {
 
       adicionarProduto() {
@@ -108,21 +112,26 @@ import conversorDeMoeda from '@/utils/conversor-moeda';
         }
       },
 
+      ordenarProdutos(prodA, prodB) {
+
+        // A < B = -1 | A > B = 1 | A = B = 0 | nem sempre o id vem em ordem, então precisamos utilizar essa lógica para ordenar os produtos
+        return (prodA.id < prodB.id) ? -1 : (prodA > prodB) ? 1 : 0
+      },
+
       obterTodosOsProdutos() {
         produtoService.obterTodos()
         .then(response => {
-          this.produtos = response.data.map(p => new Produto(p));
+          let produtos = response.data.map(p => new Produto(p));
+
+          //para mudar para ordem decrescente, podemos adicionar o .reverse()
+          this.produtos = produtos.sort(this.ordenarProdutos);
         })
         .catch(error => {
           console.log(error)
         })
       }
-    },
-    mounted() {
-      this.obterTodosOsProdutos();
     }
-  }
-
+  };
 </script>
 
 <style scoped>
