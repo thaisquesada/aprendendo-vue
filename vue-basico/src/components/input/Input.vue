@@ -1,7 +1,7 @@
 <template>
     <div>
         <label for="">{{ label }}</label> <br>
-        <input :placeHolder="placeHolder" :type="type">
+        <input :placeHolder="placeHolder" :type="type" v-model="valor">
     </div>
 </template>
 
@@ -9,14 +9,24 @@
 
 export default {
     name: 'Input',
+    model: {
+        prop: "value",
+        event: 'onChange'
+    },
     props: {
-        label: { type: String, require },
+        label: { type: String, default: '' },
+        type: { type: String, default: 'text' },
         placeHolder: { type: String, default: '' },
-        type: { type: String, default: 'text' }
+        value: { type: String, default: '' }
     },
     data() {
         return {
-
+            valor: this.value
+        }
+    },
+    watch: {
+        valor() {
+            this.$emit('onChange', this.valor);
         }
     }
 }

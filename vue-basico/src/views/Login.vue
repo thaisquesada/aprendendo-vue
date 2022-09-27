@@ -6,12 +6,14 @@
         <Input
         label="E-mail"
         placeHolder="exemplo@gmail.com"
+        v-model="usuario.email"
         ></Input>
 
         <Input
         label="Senha"
         placeHolder="123456"
         type=password
+        v-model="usuario.senha"
         ></Input>
 
         <Button
@@ -26,14 +28,23 @@ import Input from '@/components/input/Input.vue';
 import Button from '@/components/button/Button.vue';
 
 export default {
+    name: 'Login',
     components: {
         Input,
         Button
     },
+    data() {
+        return {
+            usuario: {
+                email: '',
+                senha: ''
+            }
+        }
+    },
     methods: {
         login() {
             // Criar uma lógica para acessar o sistema
-            this.$router.push({name:'Dashboard'})
+            this.$router.push({name:'ControleDeProdutos'})
         }
     }
 }

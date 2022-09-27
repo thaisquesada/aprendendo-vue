@@ -40,6 +40,9 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    trocarImagem(produto) {
+    }
+  },
 };
 </script>
