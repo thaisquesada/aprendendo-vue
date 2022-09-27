@@ -14,7 +14,24 @@ function aplicarMascaraDataHoraEmDataIso(data) {
     return undefined;
 }
 
+function aplicarMascaraIsoEmFormatoAmericano(data) {
+    if(data) {
+        let dataAmericana = moment(data).locale('pt-br').format('YYYY-MM-DD');
+        return dataAmericana + "T00:00:00";
+    }
+    return undefined;
+}
+
+function aplicarMascaraFormatoAmericanoEmDataIso(data) {
+    if(data) {
+        return moment(data).locale('pt-br').format('YYYY-MM-DD');
+    }
+    return undefined;
+}
+
 export default {
     aplicarMascaraEmDataIso,
-    aplicarMascaraDataHoraEmDataIso
+    aplicarMascaraDataHoraEmDataIso,
+    aplicarMascaraIsoEmFormatoAmericano,
+    aplicarMascaraFormatoAmericanoEmDataIso
 }

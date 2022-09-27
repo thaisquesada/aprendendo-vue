@@ -73,6 +73,7 @@
 <script>
 import Produto from '@/models/produto-model';
 import produtoService from '@/api/produto-service';
+import conversorDeData from '@/utils/conversor-data';
 
 export default {
     name: "Produto",
@@ -115,6 +116,9 @@ export default {
                 return;
             }
 
+            this.produto.dataCadastro = 
+                conversorDeData.aplicarMascaraIsoEmFormatoAmericano(this.produto.dataCadastro)
+
             produtoService.cadastrar(this.produto)
             .then(() => {
                 alert("Produto cadastrado com sucesso!");
@@ -130,7 +134,22 @@ export default {
         },
 
         atualizarProduto() {
+            if(!this.produto.modeloValidoParaAtualizar()) {
+                alert("O código e nome do produto são obrigatórios para a atualização!");
+                return;
+            }
 
+            this.produto.dataCadastro = 
+                conversorDeData.aplicarMascaraIsoEmFormatoAmericano(this.produto.dataCadastro)
+
+            produtoService.atualizar(this.produto)
+            .then(() => {
+                alert("Produto atualizado com sucesso!");
+                this.$router.push({name: "ControleDeProdutos"});
+            })
+            .catch(error => {
+                console.log(error);
+            })
         },
 
         // o "salvar" pode servir para cadastrar ou editar

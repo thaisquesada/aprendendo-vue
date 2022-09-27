@@ -126,10 +126,11 @@ import conversorDeMoeda from '@/utils/conversor-moeda';
 </script>
 
 <style scoped>
+
   .icones-tabela {
     margin: 5px;
     cursor: pointer;
     color: var(--cor-primaria);
-
   }
+  
 </style>
