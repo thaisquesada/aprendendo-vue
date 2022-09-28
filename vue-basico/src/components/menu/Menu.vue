@@ -10,7 +10,7 @@
             <a @click="() => this.$router.push({path:'/controle-de-clientes'})">Clientes</a>
         </li>
         <li>
-            <a @click="() => this.$router.push({path:'/login'})">Login</a>
+            <a @click="logout">Sair</a>
         </li>
     </ul>
 </template>
