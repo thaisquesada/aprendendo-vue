@@ -10,6 +10,6 @@ api.interceptors.request.use((config) => {
     let token = utilStorage.obterTokenNaStorage();
     config.headers.Authorization = token;
     return config;
-})
+});
 
 export default api;

@@ -15,6 +15,37 @@
     </ul>
 </template>
 
+<script>
+import usuarioService from '@/api/usuario-service';
+import utilStore from '@/utils/storage';
+
+export default {
+    name: "Menu",
+    data() {
+        return {
+
+        }
+    },
+    methods: {
+
+        logout() {
+
+            usuarioService.logout()
+            .then(() => {
+                utilStore.removerUsuarioNaStorage();
+                utilStore.removerTokenNaStorage();
+
+                this.$router.push({path:'/login'});
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }
+
+    }
+}
+</script>
+
 <style scoped>
     ul {
         list-style-type: none;
