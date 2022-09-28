@@ -1,3 +1,5 @@
+// AUTENTICAÇÃO
+
 function login(email, senha) {
     return new Promise((resolve, reject) => {
         return api.post(`/login`, { email, senha })
@@ -6,7 +8,7 @@ function login(email, senha) {
     });
 }
 
-function logout(email, senha) {
+function logout() {
     return new Promise((resolve, reject) => {
         return api.delete(`/logout`)
         .then(response => resolve(response))
@@ -14,7 +16,27 @@ function logout(email, senha) {
     });
 }
 
+// GET
+
+function obterTodos() {
+    return new Promise((resolve, reject) => {
+        return api.get(`/usuarios`)
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+}
+
+function obterPorId(id) {
+    return new Promise((resolve, reject) => {
+        return api.get(`/produtos/${id}`)
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+}
+
 export default {
     login,
-    logout
+    logout,
+    obterTodos,
+    obterPorId
 }
