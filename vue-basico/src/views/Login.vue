@@ -26,6 +26,8 @@
 <script>
 import Input from '@/components/input/Input.vue';
 import Button from '@/components/button/Button.vue';
+import Usuario from '@/models/usuario-model';
+import usuarioService from '@/api/usuario-service';
 
 export default {
     name: 'Login',
@@ -35,15 +37,31 @@ export default {
     },
     data() {
         return {
-            usuario: {
-                email: '',
-                senha: ''
-            }
+            usuario: new Usuario()
         }
     },
     methods: {
         login() {
-            // Criar uma lógica para acessar o sistema
+            
+            if(!this.usuario.modeloValidoLogin()) {
+                this.$swal({
+                    icon: "warning",
+                    title: "Usuário e Senha são obrigatórios!",
+                    confirmButtomText: "Ok"
+                })
+                return;
+            }
+
+            // REQUISIÇÃO PARA O BACK-END
+            usuarioService.login(this.usuario.email, this.usuario.senha)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            
+
             this.$router.push({name:'ControleDeProdutos'})
         }
     }
