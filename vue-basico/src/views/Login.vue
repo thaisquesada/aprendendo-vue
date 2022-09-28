@@ -11,7 +11,7 @@
 
         <Input
         label="Senha"
-        placeHolder="123456"
+        placeHolder="********"
         type=password
         v-model="usuario.senha"
         ></Input>
@@ -28,6 +28,7 @@ import Input from '@/components/input/Input.vue';
 import Button from '@/components/button/Button.vue';
 import Usuario from '@/models/usuario-model';
 import usuarioService from '@/api/usuario-service';
+import utilStorage from '@/utils/storage';
 
 export default {
     name: 'Login',
@@ -55,14 +56,15 @@ export default {
             // REQUISIÇÃO PARA O BACK-END
             usuarioService.login(this.usuario.email, this.usuario.senha)
             .then(response => {
-                console.log(response);
+                this.usuario = new Usuario(response.data.usuario);
+
+                utilStorage.salvarUsuarioNaStorage(this.usuario);
+                utilStorage.salvarTokenNaStorage(response.data.token);
+                this.$router.push({ name: 'ControleDeProdutos' });
             })
             .catch(error => {
                 console.log(error);
             })
-            
-
-            this.$router.push({name:'ControleDeProdutos'})
         }
     }
 }
